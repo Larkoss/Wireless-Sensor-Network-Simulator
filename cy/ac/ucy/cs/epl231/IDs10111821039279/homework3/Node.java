@@ -25,8 +25,21 @@ public class Node {
 		return id.charAt(0) == '0';
 	}
 
-	public String getId(){
+	public String getId() {
 		return this.id;
+	}
+
+	// Setters
+	public void addAdjacent(Node A) {
+		adjacents.add(A);
+	}
+
+	public void deleteAdjacent(String id) {
+		for (int i = 0; i < adjacents.size(); i++) {
+			if (adjacents.get(i).getId().equals(id)) {
+				adjacents.remove(i);
+			}
+		}
 	}
 
 	// Constructor
@@ -38,19 +51,10 @@ public class Node {
 		adjacents = new ArrayList<Node>();
 	}
 
-	public void removeAdjacent(String id) {
-		for (int i = 0; i < adjacents.size(); i++) {
-			if (adjacents.get(i).id.equals(id)) {
-				adjacents.remove(i);
-				break;//return
-			}
-		}
-	}
-
-	//Print
+	// Print
 	@Override
-	public String toString(){
-		return "<ID: " + getID() + ">";
+	public String toString() {
+		return "<ID: " + getId() + ">";
 	}
 
 	// public void printVertexShort() {

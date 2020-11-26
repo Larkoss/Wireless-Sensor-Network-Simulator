@@ -9,11 +9,11 @@ class Link {
         return weight;
     }
 
-    public Vertex getA() {
+    public Node getA() {
         return A;
     }
 
-    public Vertex getB() {
+    public Node getB() {
         return B;
     }
 
@@ -33,15 +33,14 @@ class Link {
     }
 
     //Equal
-    @Override
-    public boolean isEqual(Link link) {
-        return (this.A.getId() == link.getA().getId() && this.B.getId() == link.getB().getd())
+    public boolean equal(Link link) {
+        return (this.A.getId() == link.getA().getId() && this.B.getId() == link.getB().getId())
                 && (this.weight == link.weight);
     }
 
     //Print
     @Override
     public String toString() {
-        return(A.getId() + " - (" + weight + ") - " + V.getId());
+        return(A.getId() + " - (" + weight + ") - " + B.getId());
     }
 }
