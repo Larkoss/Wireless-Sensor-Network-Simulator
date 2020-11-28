@@ -56,40 +56,4 @@ public class Node {
 	public String toString() {
 		return "<ID: " + getId() + ">";
 	}
-
-	// public void printVertexShort() {
-	// String s = "<ID: " + getID() + ">";
-	// System.out.print(s);
-	// }
-
-	// public void printVertexOnlyNeighbours() {
-	// String s = "<ID: " + getID();
-	// s += " | Neighbour IDs[";
-	// if (neighbours.size() > 0) {
-	// for (int i = 0; i < neighbours.size() - 1; i++) {
-	// s += neighbours.get(i).getID();
-	// s += ", ";
-	// }
-	// s += neighbours.get(neighbours.size() - 1).getID();
-	// }
-	// s += "]>";
-	// System.out.print(s);
-	// }
-
-	// public void printVertexLong() {
-	// String s = "<ID: " + getID() + " | Position (" + getX() + ", " + getY() + ")
-	// | Firefighter: " + isFirefighter()
-	// + " | Temperature: " + getTemp();
-	// s += " | Neighbour IDs[";
-	// if (neighbours.size() > 0) {
-	// for (int i = 0; i < neighbours.size() - 1; i++) {
-	// s += neighbours.get(i).getID();
-	// s += ", ";
-	// }
-	// s += neighbours.get(neighbours.size() - 1).getID();
-	// }
-	// s += "]>";
-	// System.out.print(s);
-	// }
-
 }

@@ -11,10 +11,11 @@ public class Driver {
 			System.exit(0);
 		}
 
+		//Initialize graph
 		int distance = Integer.parseInt(args[0]);
 		Graph g = new Graph(distance);
 		
-		//Read from file
+		//Create File Stream
 		Scanner inputStream = null;
 		try {
 			inputStream = new Scanner(new FileInputStream(args[1]));
@@ -22,6 +23,7 @@ public class Driver {
 			System.out.println("File not found");
 			System.exit(0);
 		}
+		//Read from file
 		int x, y, temp;
 		String sx, sy, id;
 		while (inputStream.hasNext()) {
@@ -31,12 +33,11 @@ public class Driver {
 			sy = inputStream.next();
 			y = Integer.parseInt(sy.substring(0, sy.length() - 1));
 			temp = Integer.parseInt(inputStream.next());
-
+			//Add nodes
 			Node n = new Node(id, x, y, temp);
 			g.add(n);
 		}
-		
-		System.out.printf("args[0] = %s\nargs[1] = %s", args[0], args[1]);
+		//Prints
 		g.printHashtable();
 		g.printGraph();
 
