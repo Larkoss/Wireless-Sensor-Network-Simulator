@@ -12,7 +12,7 @@ public class Graph {
 	private int distance;
 
 	// Getters
-	private static int findDinstance(Node A, Node B) {
+	private static int findDistance(Node A, Node B) {
 		return (int) Math.sqrt(Math.pow(A.getX() - B.getX(), 2) + Math.pow(A.getY() - B.getY(), 2));
 	}
 
@@ -28,7 +28,7 @@ public class Graph {
 	}
 
 	// Constructor
-	public Graph(int d) {
+	public Graph(int distance) {
 		this.distance = distance;
 		this.height = 5;
 		hashTable = new LinkedList[height];
@@ -86,7 +86,7 @@ public class Graph {
 	private void attachAdjacents(Node A) {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < hashTable[i].size(); j++) {
-				if (findDinstance(A, hashTable[i].get(j)) < this.distance && findDinstance(A, hashTable[i].get(j)) > 0) {
+				if (findDistance(A, hashTable[i].get(j)) < this.distance && findDistance(A, hashTable[i].get(j)) > 0) {
 					hashTable[i].get(j).addAdjacent(A);
 					A.addAdjacent(hashTable[i].get(j));
 				}
@@ -103,84 +103,31 @@ public class Graph {
 			}
 	}
 
-	public void printGraph() {
-		for (int i = 0; i < height; i++) {
-			System.out.print(i + ": ");
-			for (int j = 0; j < hashTable[i].size(); j++) {
-				//hashTable[i].get(j).printVertexShort();
-				System.out.print(hashTable[i].get(j));
-				System.out.print("   ");
-			}
-			System.out.println();
+	// public void printHashtable() {
+	// 	for (int i = 0; i < height; i++) {
+	// 		System.out.print(i + ": ");
+	// 		for (int j = 0; j < hashTable[i].size(); j++) {
+	// 			//hashTable[i].get(j).printVertexShort();
+	// 			System.out.print(hashTable[i].get(j));
+	// 			System.out.print("   ");
+	// 		}
+	// 		System.out.println();
+	// 	}
+	// }
+
+	// public void printGraph() {
+	// 	for (int i = 0; i < height; i++) {
+	// 		for (int j = 0; j < hashTable[i].size(); j++) 
+	// 		{
+	// 			System.out.print(hashTable[i].get(j)+ ": ");
+	// 			for(int k = 0; k < hashTable[i].get(j).adjacents.size(); k++) 
+	// 			{
+	// 				System.out.print(hashTable[i].get(j).adjacents.get(k));
+	// 				System.out.print("   ");
+	// 			}
+	// 			System.out.println();
+	// 		}
+			
 		}
 	}
-	// Print
-
-	// public void printGraphLong() {
-	// for (int i = 0; i < height; i++) {
-	// System.out.print(i + ": ");
-	// for (int j = 0; j < table[i].size(); j++) {
-	// table[i].get(j).printVertexLong();
-	// System.out.print(" ");
-	// }
-	// System.out.println();
-	// }
-	// }
-
-	// public void printGraphOnlyNeighbours() {
-	// for (int i = 0; i < height; i++) {
-	// System.out.print(i + ": ");
-	// for (int j = 0; j < table[i].size(); j++) {
-	// table[i].get(j).printVertexOnlyNeighbours();
-	// System.out.print(" ");
-	// }
-	// System.out.println();
-	// }
-	// }
-
-	// Spanning Tree
-
-	// public void minimumSpanningTree() {
-	// ArrayList<Edge> edges = new ArrayList<Edge>();
-	// Edge temp;
-	// int d;
-	// boolean flagExists;
-	// for (int i = 0; i < height; i++) {
-	// for (int j = 0; j < table[i].size(); j++) {
-	// for (int k = 0; k < table[i].get(j).getAmountOfNeighbours(); k++) {
-	// d = distance(table[i].get(j), table[i].get(j).getNeighbourAt(k));
-	// temp = new Edge(d, table[i].get(j), table[i].get(j).getNeighbourAt(k));
-	// edges.add(temp);
-	// }
-	// }
-	// }
-
-	// // remove dups
-	// int s = edges.size();
-	// for (int i = 0; i < s; i++) {
-	// for (int j = 0; j < s; j++) {
-	// if (i != j && edges.get(i).isEqual(edges.get(j))) {
-	// edges.remove(j);
-	// s--;
-	// }
-	// }
-	// }
-
-	// // sort
-	// Collections.sort(edges, new Comparator<Edge>() {
-	// @Override
-	// public int compare(Edge e1, Edge e2) {
-	// if (e1.getWeight() == e2.getWeight()) {
-	// return 0;
-	// }
-	// if (e1.getWeight() > e2.getWeight())
-	// return 1;
-	// return -1;
-	// }
-	// });
-
-	// for (int i = 0; i < edges.size(); i++) {
-	// edges.get(i).printEdge();
-	// }
-	// }
 }
