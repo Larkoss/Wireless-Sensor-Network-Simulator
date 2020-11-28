@@ -103,30 +103,30 @@ public class Graph {
 			}
 	}
 
-	// public void printHashtable() {
-	// 	for (int i = 0; i < height; i++) {
-	// 		System.out.print(i + ": ");
-	// 		for (int j = 0; j < hashTable[i].size(); j++) {
-	// 			//hashTable[i].get(j).printVertexShort();
-	// 			System.out.print(hashTable[i].get(j));
-	// 			System.out.print("   ");
-	// 		}
-	// 		System.out.println();
-	// 	}
-	// }
+	public void printHashtable() {
+		for (int i = 0; i < height; i++) {
+			System.out.print(i + ": ");
+			for (int j = 0; j < hashTable[i].size(); j++) {
+				//hashTable[i].get(j).printVertexShort();
+				System.out.print(hashTable[i].get(j));
+				System.out.print("   ");
+			}
+			System.out.println();
+		}
+	}
 
-	// public void printGraph() {
-	// 	for (int i = 0; i < height; i++) {
-	// 		for (int j = 0; j < hashTable[i].size(); j++) 
-	// 		{
-	// 			System.out.print(hashTable[i].get(j)+ ": ");
-	// 			for(int k = 0; k < hashTable[i].get(j).adjacents.size(); k++) 
-	// 			{
-	// 				System.out.print(hashTable[i].get(j).adjacents.get(k));
-	// 				System.out.print("   ");
-	// 			}
-	// 			System.out.println();
-	// 		}
+	public void printGraph() {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < hashTable[i].size(); j++) 
+			{
+				System.out.print(hashTable[i].get(j)+ ": ");
+				for(int k = 0; k < hashTable[i].get(j).adjacents.size(); k++) 
+				{
+					System.out.print(hashTable[i].get(j).adjacents.get(k));
+					System.out.print("   ");
+				}
+				System.out.println();
+			}
 			
 		}
 	}
