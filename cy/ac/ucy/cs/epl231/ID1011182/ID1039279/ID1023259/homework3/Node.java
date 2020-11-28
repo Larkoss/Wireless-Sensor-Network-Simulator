@@ -1,8 +1,8 @@
-package cy.ac.ucy.cs.epl231.IDs10111821039279.homework3;
+package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
 
 import java.util.ArrayList;
 
-public class Node {
+public class Node implements Comparable<Node>{
 	private int x, y;
 	private String id;
 	private int temperature;
@@ -57,5 +57,12 @@ public class Node {
 	@Override
 	public String toString() {
 		return "<ID: " + getId() + ">";
+	}
+
+	@Override
+	public int compareTo(Node B) {
+		int idA = Integer.parseInt(this.getId());
+        int idB = Integer.parseInt(B.getId());
+		return Integer.compare(idA, idB);
 	}
 }

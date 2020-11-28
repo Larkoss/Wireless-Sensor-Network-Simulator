@@ -1,4 +1,4 @@
-package cy.ac.ucy.cs.epl231.IDs10111821039279.homework3;
+package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
 
 import java.util.*;
 
@@ -94,7 +94,7 @@ public class Graph {
 	private void attachAdjacents(Node A) {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < hashTable[i].size(); j++) {
-				if (findDistance(A, hashTable[i].get(j)) < this.distance && findDistance(A, hashTable[i].get(j)) > 0) {
+				if (findDistance(A, hashTable[i].get(j)) < this.distance && A.compareTo(hashTable[i].get(j)) != 0) {
 					hashTable[i].get(j).addAdjacent(A);
 					A.addAdjacent(hashTable[i].get(j));
 				}

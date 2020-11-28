@@ -1,5 +1,5 @@
-package cy.ac.ucy.cs.epl231.IDs10111821039279.homework3;
-import cy.ac.ucy.cs.epl231.IDs10111821039279.homework3.Node;
+package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
+import cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3.Node;
 class Link implements Comparable<Link>{
     int weight;
     Node A, B;
