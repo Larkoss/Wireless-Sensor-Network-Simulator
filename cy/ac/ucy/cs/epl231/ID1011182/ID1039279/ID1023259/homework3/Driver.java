@@ -2,20 +2,20 @@ package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Driver {
 	public static void main(String[] args) {
-		if(args.length < 2){
+		if (args.length < 2) {
 			System.out.println("Not enough arguments");
 			System.exit(0);
 		}
 
-		//Initialize graph
+		// Initialize graph
 		int distance = Integer.parseInt(args[0]);
 		Graph g = new Graph(distance);
-		
-		//Create File Stream
+
+		// Create File Stream
 		Scanner inputStream = null;
 		try {
 			inputStream = new Scanner(new FileInputStream(args[1]));
@@ -23,7 +23,7 @@ public class Driver {
 			System.out.println("File not found");
 			System.exit(0);
 		}
-		//Read from file
+		// Read from file
 		int x, y, temp;
 		String sx, sy, id;
 		int number = 0;
@@ -34,18 +34,28 @@ public class Driver {
 			sy = inputStream.next();
 			y = Integer.parseInt(sy.substring(0, sy.length() - 1));
 			temp = Integer.parseInt(inputStream.next());
-			//Add nodes
+			// Add nodes
 			Node n = new Node(id, x, y, temp, number++);
 			g.add(n);
 		}
-		//Prints
-		System.out.println("Print Hashtable");
-		g.printHashtable();
-		System.out.println("Print Adjacency List");
-		g.printGraph();
+		// Prints
+		// System.out.println("Print Hashtable");
+		// g.printHashtable();
+		// System.out.println("Print Adjacency List");
+		// g.printGraph();
 		System.out.println("Print MST Edges");
 		System.out.println("Format: \"src\" - weight - \"dest\"");
-		g.minimumSpanningTree("02");
+		ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
+		System.out.println(mstLinks + "\n");
+		System.out.println("BFS");
+		Graph gMST = new Graph(g, mstLinks);
+		gMST.printBFS( gMST.find("02"));
+		// Prints
+		// System.out.println("Print Hashtable");
+		// gMST.printHashtable();
+		// System.out.println("Print Adjacency List");
+		// gMST.printGraph();
+		
 	}
 
 }

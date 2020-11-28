@@ -1,6 +1,9 @@
 package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
+
 import cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3.Node;
-class Link implements Comparable<Link>{
+
+ 
+class Link implements Comparable<Link> {
     int weight;
     Node A, B;
 
@@ -16,25 +19,15 @@ class Link implements Comparable<Link>{
     public Node getB() {
         return B;
     }
+     
 
-
-    //Constuctor
+    //  Constuctor
     public Link(int weight, Node A, Node B) {
-        int idA = Integer.parseInt(A.getId());
-        int idB = Integer.parseInt(B.getId());
-        // if (idA < idB) {
-        //     this.A = A;
-        //     this.B = B;
-        // } else {
-        //     this.A = B;
-        //     this.B = A;
-        // }
         this.A = A;
         this.B = B;
         this.weight = weight;
     }
-
-    //Print
+  
     @Override
     public String toString() {
         return(A.getId() + " - (" + weight + ") - " + B.getId());
@@ -44,4 +37,4 @@ class Link implements Comparable<Link>{
     public int compareTo(Link other) {
         return Integer.compare(this.getWeight(), other.getWeight());
     }
-}
+}  

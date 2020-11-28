@@ -36,6 +36,23 @@ public class Graph {
 		}
 	}
 
+	// Constructor using the MST
+	public Graph(Graph g, ArrayList<Link> mstLinks) {
+		this.numNodes = g.numNodes;
+		this.distance = g.distance;
+		this.height = g.height;
+		hashTable = g.hashTable;
+		for (int i = 0; i < height; i++)
+			for (int j = 0; j < hashTable[i].size(); j++)
+				hashTable[i].get(j).adjacents.clear();
+		for (int i = 0; i < mstLinks.size(); i++) {
+			Node A = mstLinks.get(i).getA();
+			Node B = mstLinks.get(i).getB();
+			A.addAdjacent(B);
+			B.addAdjacent(A);
+		}
+	}
+
 	// Hashfunction
 	private int hashFunction(String id) {
 		return (Integer.parseInt(id) % this.getHeight());
@@ -50,7 +67,7 @@ public class Graph {
 		return false;
 	}
 
-	public Node find(String id){
+	public Node find(String id) {
 		int i = hashFunction(id);
 		for (int j = 0; j < hashTable[i].size(); j++)
 			if (hashTable[i].get(j).getId().equals(id))
@@ -114,47 +131,48 @@ public class Graph {
 	}
 
 	// Minimum Spanning Tree
-	public void minimumSpanningTree(String id) {
-		//Keep track of which nodes are visited
+	public ArrayList<Link> minimumSpanningTree(String id) {
+		// Keep track of which nodes are visited
 		boolean visited[] = new boolean[numNodes];
-		//Initialize priority queue
+		// Initialize priority queue
 		PriorityQueue<Link> pq = new PriorityQueue<Link>();
 		int m = numNodes - 1;
-		int edgeCount = 0, mstCost = 0;
-		//Links that are form the MST
+		int edgeCount = 0;
+		// int mstCost = 0;
+		// Links that are form the MST
 		ArrayList<Link> mstLinks = new ArrayList<Link>();
-		//Add the Links of the first node to the
-		//priority queue
+		// Add the Links of the first node to the
+		// priority queue
 		addEdges(id, pq, visited);
-		//Temp link
+		// Temp link
 		Link edge;
-		
+
 		int i = 0;
-		while(pq.peek() != null && edgeCount != m) {
-			//System.out.println("pq: " + pq);
+		while (pq.peek() != null && edgeCount != m) {
+			// System.out.println("pq: " + pq);
 			edge = pq.poll();
 
-			if(visited[edge.getB().number])
+			if (visited[edge.getB().number])
 				continue;
-			
-			mstCost += edge.getWeight();
+
+			// mstCost += edge.getWeight();
 			mstLinks.add(edge);
 
 			addEdges(edge.getB().getId(), pq, visited);
-			if(i == 10)
+			if (i == 10)
 				break;
 			i++;
 		}
-		System.out.println(mstLinks);
+		return mstLinks;
 	}
 
 	// Supplementary Function for MST
 	private void addEdges(String id, PriorityQueue<Link> pq, boolean[] visited) {
 		Node A = find(id);
 		visited[A.number] = true;
-		for(int k = 0; k < A.adjacents.size(); k++){
+		for (int k = 0; k < A.adjacents.size(); k++) {
 			Node B = A.adjacents.get(k);
-			if(visited[B.number] == false){
+			if (visited[B.number] == false) {
 				Link edge = new Link(findDistance(A, B), A, B);
 				pq.add(edge);
 			}
@@ -186,5 +204,39 @@ public class Graph {
 			}
 		}
 		System.out.println();
+	}
+
+	// prints BFS traversal from a given source s
+	void printBFS(Node A) {
+		// Mark all the vertices as not visited(By default
+		// set as false)
+		boolean visited[] = new boolean[this.numNodes];
+
+		// Create a queue for BFS
+		LinkedList<Node> queue = new LinkedList<Node>();
+
+		// Mark the current node as visited and enqueue it
+		Node s = A;
+		visited[s.number] = true;
+		queue.add(s);
+
+		while (queue.size() != 0) {
+			// Dequeue a vertex from queue and print it
+			s = queue.poll();
+			System.out.print(s + " ");
+
+			// Get all adjacent vertices of the dequeued vertex s
+			// If a adjacent has not been visited, then mark it
+			// visited and enqueue it
+			Iterator<Node> i = s.adjacents.iterator();
+			while (i.hasNext()) {
+				Node n = i.next();
+				if (!visited[n.number]) {
+					visited[n.number] = true;
+					queue.add(n);
+				}
+			}
+		}
+		System.out.println("\n");
 	}
 }
