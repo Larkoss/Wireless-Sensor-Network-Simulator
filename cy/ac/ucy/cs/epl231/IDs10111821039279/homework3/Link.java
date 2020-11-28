@@ -1,6 +1,6 @@
+package cy.ac.ucy.cs.epl231.IDs10111821039279.homework3;
 import cy.ac.ucy.cs.epl231.IDs10111821039279.homework3.Node;
-
-class Link {
+class Link implements Comparable<Link>{
     int weight;
     Node A, B;
 
@@ -42,5 +42,10 @@ class Link {
     @Override
     public String toString() {
         return(A.getId() + " - (" + weight + ") - " + B.getId());
+    }
+
+    @Override
+    public int compareTo(Link other) {
+        return Integer.compare(getWeight(), other.getWeight());
     }
 }
