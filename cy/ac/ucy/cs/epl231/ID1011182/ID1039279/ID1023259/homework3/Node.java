@@ -2,7 +2,7 @@ package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
 
 import java.util.ArrayList;
 
-public class Node implements Comparable<Node> {
+public class Node implements Comparable<Node>, Cloneable {
 	private int x, y;
 	private String id;
 	private int temperature;
@@ -64,4 +64,25 @@ public class Node implements Comparable<Node> {
 		int idB = Integer.parseInt(B.getId());
 		return Integer.compare(idA, idB);
 	}
+
+	public Node clone() {
+
+		Node copy = null;
+
+		try {
+			copy = (Node) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// this should never happen
+			throw new InternalError(e.toString());
+		}
+
+		copy.id = id;
+		copy.x = x;
+		copy.y = y;
+		copy.temperature = temperature;
+		copy.adjacents = new ArrayList<Node>();
+		copy.number = number;
+		return copy;
+	}
+
 }

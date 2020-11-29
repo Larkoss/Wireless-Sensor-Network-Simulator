@@ -5,7 +5,20 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Driver {
+
+	public static void printMenu() {
+		System.out.println("Enter a number to execute the operation described: ");
+		System.out.println("1. Calculate Minimum Spanning Tree(MST)");
+		System.out.println("2. Print MST using BFS");
+		System.out.println("3. Add new node and change MST");
+		System.out.println("4. Remove node and change MST");
+		System.out.println("5. Calculate network's maximum temparature using a fire station");
+		System.out.println("6. Exit");
+	}
+
 	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+
 		if (args.length < 2) {
 			System.out.println("Not enough arguments");
 			System.exit(0);
@@ -43,19 +56,93 @@ public class Driver {
 		// g.printHashtable();
 		// System.out.println("Print Adjacency List");
 		// g.printGraph();
-		System.out.println("Print MST Edges");
-		System.out.println("Format: \"src\" - weight - \"dest\"");
-		ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
-		System.out.println(mstLinks + "\n");
-		System.out.println("BFS");
-		Graph gMST = new Graph(g, mstLinks);
-		gMST.printBFS( gMST.find("02"));
+		// System.out.println("Print MST Edges");
+		// System.out.println("Format: \"src\" - weight - \"dest\"");
+		// System.out.println(mstLinks + "\n");
+
+		int input = 0;
+		printMenu();
+		System.out.print("Enter option: ");
+		input = scan.nextInt();
+		Graph gMST = null;
+		while (input != 6) {
+			if (input == 1) {
+				// System.out.println("g Print Adjacency List");
+				// g.printGraph();
+				ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
+				gMST = new Graph(g, mstLinks);
+				// System.out.println("MST Print Adjacency List");
+				// gMST.printGraph();
+			} else if (input == 2) {
+				if (gMST == null)
+					System.out.println("MST not yet calculated!");
+				else {
+					System.out.println("BFS");
+					gMST.printBFS(gMST.find("02"));
+				}
+			} else if (input == 3) {
+				System.out.print("Enter id: ");
+				id = scan.next();
+				System.out.print("Enter x: ");
+				x = scan.nextInt();
+				System.out.print("Enter y: ");
+				y = scan.nextInt();
+				System.out.print("Enter temperature: ");
+				temp = scan.nextInt();
+				// Add noded
+				Node n = new Node(id, x, y, temp, number++);
+				// System.out.println("g.add(n)");
+				g.add(n);
+				// System.out.println("gMST.add(n)");
+				gMST.add(n.clone());
+				// Calculate new mst
+				ArrayList<Link> mstLinks = gMST.minimumSpanningTree("02");
+				gMST = new Graph(gMST, mstLinks);
+			} else if (input == 4) {
+				System.out.print("Enter id: ");
+				id = scan.next();
+				// Add noded
+				g.delete(id);
+				ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
+				gMST = new Graph(g, mstLinks);
+			} else if (input == 5) {
+				if (gMST == null)
+					System.out.println("MST not yet calculated!");
+				else {
+					System.out.println("Enter fire station: ");
+					String stationID = scan.next();
+					if (stationID.charAt(0) != '0') {
+						System.out.println("ID doesn't belong to a fire station!");
+						continue;
+					}
+					Node station = gMST.find(stationID);
+					if (station == null) {
+						System.out.println("Fire station doesnt exist!");
+						continue;
+					}
+					System.out.printf("Max temperature found = %d\n", gMST.temperatureBFS(station));
+				}
+			} else if (input == 0) {
+				System.out.println("g Print Hashtable");
+				g.printHashtable();
+				System.out.println("g Print Adjacency List");
+				g.printGraph();
+				System.out.println("mst Print Hashtable");
+				gMST.printHashtable();
+				System.out.println("mst Print Adjacency List");
+				gMST.printGraph();
+			}
+			printMenu();
+			System.out.print("Enter option: ");
+			input = scan.nextInt();
+		}
+
 		// Prints
 		// System.out.println("Print Hashtable");
 		// gMST.printHashtable();
 		// System.out.println("Print Adjacency List");
 		// gMST.printGraph();
-		
+
 	}
 
 }

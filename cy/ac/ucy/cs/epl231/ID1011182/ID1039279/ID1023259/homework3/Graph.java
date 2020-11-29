@@ -41,13 +41,19 @@ public class Graph {
 		this.numNodes = g.numNodes;
 		this.distance = g.distance;
 		this.height = g.height;
-		hashTable = g.hashTable;
+		hashTable = new LinkedList[height];
+		for (int i = 0; i < height; i++) 
+			hashTable[i] = new LinkedList<Node>();
 		for (int i = 0; i < height; i++)
-			for (int j = 0; j < hashTable[i].size(); j++)
+			for (int j = 0; j < g.hashTable[i].size(); j++) {
+				hashTable[i].add(g.hashTable[i].get(j).clone());
 				hashTable[i].get(j).adjacents.clear();
+			}
+		// System.out.println("mstLinks:\n" + mstLinks + " size = " + mstLinks.size());
 		for (int i = 0; i < mstLinks.size(); i++) {
-			Node A = mstLinks.get(i).getA();
-			Node B = mstLinks.get(i).getB();
+			Node A = this.find(mstLinks.get(i).getA().getId());
+			Node B = this.find(mstLinks.get(i).getB().getId());
+			// System.out.println("A = " + A + " B = " + B);
 			A.addAdjacent(B);
 			B.addAdjacent(A);
 		}
@@ -78,6 +84,7 @@ public class Graph {
 	public void add(Node A) {
 		// Check if it already exists
 		if (exist(A) == true) {
+			System.out.println("EXISTS!");
 			return;
 		}
 		// If not full add it immediatly
@@ -125,7 +132,7 @@ public class Graph {
 				hashTable[i].get(j).deleteAdjacent(id);
 				if (hashTable[i].get(j).getId().equals(id)) {
 					hashTable[i].remove(j);
-					this.numNodes--;
+					//this.numNodes--;
 				}
 			}
 	}
@@ -159,9 +166,6 @@ public class Graph {
 			mstLinks.add(edge);
 
 			addEdges(edge.getB().getId(), pq, visited);
-			if (i == 10)
-				break;
-			i++;
 		}
 		return mstLinks;
 	}
@@ -239,4 +243,40 @@ public class Graph {
 		}
 		System.out.println("\n");
 	}
+
+	int temperatureBFS(Node A) {
+		// Mark all the vertices as not visited(By default
+		// set as false)
+		boolean visited[] = new boolean[this.numNodes];
+
+		// Create a queue for BFS
+		LinkedList<Node> queue = new LinkedList<Node>();
+
+		// Mark the current node as visited and enqueue it
+		Node s = A;
+		visited[s.number] = true;
+		queue.add(s);
+		int maxTemp = -274;
+		while (queue.size() != 0) {
+			// Dequeue a vertex from queue and print it
+			s = queue.poll();
+			int temp = s.getTemperature();
+			if(temp > maxTemp)
+				maxTemp = temp;
+
+			// Get all adjacent vertices of the dequeued vertex s
+			// If a adjacent has not been visited, then mark it
+			// visited and enqueue it
+			Iterator<Node> i = s.adjacents.iterator();
+			while (i.hasNext()) {
+				Node n = i.next();
+				if (!visited[n.number]) {
+					visited[n.number] = true;
+					queue.add(n);
+				}
+			}
+		}
+		return maxTemp;
+	}
+
 }
