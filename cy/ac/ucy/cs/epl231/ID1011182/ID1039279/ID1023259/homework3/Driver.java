@@ -8,6 +8,7 @@ public class Driver {
 
 	public static void printMenu() {
 		System.out.println("Enter a number to execute the operation described: ");
+		System.out.println("0. Print Hashtables and Adjacency Lists");
 		System.out.println("1. Calculate Minimum Spanning Tree(MST)");
 		System.out.println("2. Print MST using BFS");
 		System.out.println("3. Add new node and change MST");
@@ -51,11 +52,6 @@ public class Driver {
 			Node n = new Node(id, x, y, temp, number++);
 			g.add(n);
 		}
-		// Prints
-		// System.out.println("Print Hashtable");
-		// g.printHashtable();
-		// System.out.println("Print Adjacency List");
-		// g.printGraph();
 		// System.out.println("Print MST Edges");
 		// System.out.println("Format: \"src\" - weight - \"dest\"");
 		// System.out.println(mstLinks + "\n");
@@ -67,12 +63,8 @@ public class Driver {
 		Graph gMST = null;
 		while (input != 6) {
 			if (input == 1) {
-				// System.out.println("g Print Adjacency List");
-				// g.printGraph();
 				ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
 				gMST = new Graph(g, mstLinks);
-				// System.out.println("MST Print Adjacency List");
-				// gMST.printGraph();
 			} else if (input == 2) {
 				if (gMST == null)
 					System.out.println("MST not yet calculated!");
@@ -91,20 +83,21 @@ public class Driver {
 				temp = scan.nextInt();
 				// Add noded
 				Node n = new Node(id, x, y, temp, number++);
-				// System.out.println("g.add(n)");
 				g.add(n);
-				// System.out.println("gMST.add(n)");
-				gMST.add(n.clone());
-				// Calculate new mst
-				ArrayList<Link> mstLinks = gMST.minimumSpanningTree("02");
-				gMST = new Graph(gMST, mstLinks);
+				if(gMST != null) {
+					gMST.add(n.clone());
+					ArrayList<Link> mstLinks = gMST.minimumSpanningTree("02");
+					gMST = new Graph(gMST, mstLinks);
+				}
 			} else if (input == 4) {
 				System.out.print("Enter id: ");
 				id = scan.next();
 				// Add noded
 				g.delete(id);
-				ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
-				gMST = new Graph(g, mstLinks);
+				if(gMST != null) {
+					ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
+					gMST = new Graph(g, mstLinks);
+				}
 			} else if (input == 5) {
 				if (gMST == null)
 					System.out.println("MST not yet calculated!");
@@ -128,9 +121,11 @@ public class Driver {
 				System.out.println("g Print Adjacency List");
 				g.printGraph();
 				System.out.println("mst Print Hashtable");
-				gMST.printHashtable();
-				System.out.println("mst Print Adjacency List");
-				gMST.printGraph();
+				if(gMST != null) {
+					gMST.printHashtable();
+					System.out.println("mst Print Adjacency List");
+					gMST.printGraph();
+				}
 			}
 			printMenu();
 			System.out.print("Enter option: ");
