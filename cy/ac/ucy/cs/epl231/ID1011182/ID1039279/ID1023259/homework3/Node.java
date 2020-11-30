@@ -65,6 +65,10 @@ public class Node implements Comparable<Node>, Cloneable {
 		return Integer.compare(idA, idB);
 	}
 
+	//Implement clone
+	//Used to add a clone of the node in MST graph(Driver class)
+	//So when adjacents are deleted in clone
+	//the original node is intacted
 	public Node clone() {
 
 		Node copy = null;

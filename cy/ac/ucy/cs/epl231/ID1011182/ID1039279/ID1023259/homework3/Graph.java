@@ -10,11 +10,11 @@ public class Graph {
 	private int numNodes;
 
 	// Getters
-	private static int findDistance(Node A, Node B) {
+	public static int findDistance(Node A, Node B) {
 		return (int) Math.sqrt(Math.pow(A.getX() - B.getX(), 2) + Math.pow(A.getY() - B.getY(), 2));
 	}
 
-	private int getHeight() {
+	public int getHeight() {
 		return this.height;
 	}
 
@@ -23,6 +23,10 @@ public class Graph {
 			if (hashTable[i].size() > 19)
 				return true;
 		return false;
+	}
+
+	public int getDd() {
+		return this.distance;
 	}
 
 	// Constructor
@@ -65,6 +69,9 @@ public class Graph {
 	}
 
 	// Node Manipulation
+
+	//Check if a nodes exists in the hashtable
+	//return true/false
 	public boolean exist(Node A) {
 		int i = hashFunction(A.getId());
 		for (int j = 0; j < hashTable[i].size(); j++)
@@ -73,6 +80,7 @@ public class Graph {
 		return false;
 	}
 
+	//Return a node using its id
 	public Node find(String id) {
 		int i = hashFunction(id);
 		for (int j = 0; j < hashTable[i].size(); j++)
@@ -107,6 +115,7 @@ public class Graph {
 					newHash[position].add(hashTable[i].get(j));
 				}
 			}
+			//Finally add the node to the new hashtable
 			hashTable = newHash;
 			int position = hashFunction(A.getId());
 			hashTable[position].add(A);
@@ -115,10 +124,13 @@ public class Graph {
 		this.numNodes++;
 	}
 
+	//Calculate each distance from every other node
+	//if its close enough add to adjacents
 	private void attachAdjacents(Node A) {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < hashTable[i].size(); j++) {
 				if (findDistance(A, hashTable[i].get(j)) < this.distance && A.compareTo(hashTable[i].get(j)) != 0) {
+					//if A is adjacent to B, B is adjacent to A
 					hashTable[i].get(j).addAdjacent(A);
 					A.addAdjacent(hashTable[i].get(j));
 				}
@@ -126,13 +138,15 @@ public class Graph {
 		}
 	}
 
+	//Search and delete a node, using id
+	//Also remove it froms its adjacents' list
 	public void delete(String id) {
 		for (int i = 0; i < height; i++)
 			for (int j = 0; j < hashTable[i].size(); j++) {
 				hashTable[i].get(j).deleteAdjacent(id);
 				if (hashTable[i].get(j).getId().equals(id)) {
 					hashTable[i].remove(j);
-					//this.numNodes--;
+					j--;
 				}
 			}
 	}

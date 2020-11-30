@@ -33,7 +33,11 @@ class Link implements Comparable<Link> {
         return(A.getId() + " - (" + weight + ") - " + B.getId());
     }
 
+    
     @Override
+    //Implement compare to
+    //Used in priority queue when comparing two links
+    //to find the one with bigger priority
     public int compareTo(Link other) {
         return Integer.compare(this.getWeight(), other.getWeight());
     }
