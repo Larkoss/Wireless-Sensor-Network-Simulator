@@ -17,4 +17,6 @@ Your program should take as an argument [in the command line), the value of d, a
  5. Inform the fire-fighting centre A of the highest temperature of the network, where A is a node ID and is given as a parameter by the user. The procedure should only use paths belonging to the minimum birth tree of the writing. 
  6. Exit the program 
 
+## For further details
+Read Implementation.pdf
 ### Homework 3 EPL231 University of Cyprus Computer Science Department
