@@ -5,7 +5,7 @@ import java.util.*;
 public class Graph {
 
 	private int height;
-	private LinkedList<Node>[] hashTable;
+	LinkedList<Node>[] hashTable;
 	private int distance;
 	private int numNodes;
 
@@ -206,6 +206,40 @@ public class Graph {
 				System.out.print("   ");
 			}
 			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public void displayNodes(){
+		int i = 0;
+		System.out.print(i + ": ");
+		for (int j = 0; j < hashTable[i].size(); j++) {
+			System.out.print(hashTable[i].get(j));
+			System.out.print("   ");
+		}
+		System.out.println();
+
+		i = 1;
+		System.out.print(i + ": ");
+		for (int j = 0; j < hashTable[i].size(); j++) {
+			System.out.print(hashTable[i].get(j));
+			System.out.print("   ");
+		}
+		System.out.println();
+
+		i = 4;
+		System.out.print(i + ": ");
+		for (int j = 0; j < hashTable[i].size(); j++) {
+			System.out.print(hashTable[i].get(j));
+			System.out.print("   ");
+		}
+		System.out.println();
+
+		i = 300;
+		System.out.print(i + ": ");
+		for (int j = 0; j < hashTable[i].size(); j++) {
+			System.out.print(hashTable[i].get(j));
+			System.out.print("   ");
 		}
 		System.out.println();
 	}

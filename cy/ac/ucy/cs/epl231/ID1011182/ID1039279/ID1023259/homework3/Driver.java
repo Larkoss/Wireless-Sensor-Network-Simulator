@@ -10,22 +10,25 @@
 
 package cy.ac.ucy.cs.epl231.ID1011182.ID1039279.ID1023259.homework3;
 
+import java.io.FileWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.io.IOException;
 
 public class Driver {
 
 	// Function to print menu
 	public static void printMenu() {
 		System.out.println("Enter a number to execute the operation described: ");
-		System.out.println("0. Print Hashtables and Adjacency Lists");
+		// System.out.println("0. Print Hashtables and Adjacency Lists");
 		System.out.println("1. Calculate Minimum Spanning Tree(MST)");
 		System.out.println("2. Print MST using BFS");
 		System.out.println("3. Add new node and change MST");
 		System.out.println("4. Remove node and change MST");
 		System.out.println("5. Calculate network's maximum temparature using a fire station");
-		System.out.println("6. Exit");
+		System.out.println("6. Display Nodes");
+		System.out.println("7. Exit");
 	}
 
 	public static void main(String[] args) {
@@ -73,7 +76,7 @@ public class Driver {
 		System.out.print("Enter option: ");
 		input = scan.nextInt();
 		Graph gMST = null;
-		while (input != 6) {
+		while (input != 7) {
 			if (input == 1) {
 				// Calculate the minimum spanning tree's edges
 				ArrayList<Link> mstLinks = g.minimumSpanningTree("02");
@@ -114,11 +117,11 @@ public class Driver {
 				if (gMST != null) {
 					Node deleted = gMST.find(id);
 					gMST.delete(id);
-					//in the mst
-					//connect every adjacent of the deleted node
-					//with the rest of the adjacents of that deleted node
-					//then run the mst calculation procedure on the mst graph
-					//which is faster than running procedure done in option 1
+					// in the mst
+					// connect every adjacent of the deleted node
+					// with the rest of the adjacents of that deleted node
+					// then run the mst calculation procedure on the mst graph
+					// which is faster than running procedure done in option 1
 					for (int i = 0; i < deleted.adjacents.size(); i++)
 						for (int j = 0; j < deleted.adjacents.size(); j++) {
 							Node A = deleted.adjacents.get(i);
@@ -154,24 +157,37 @@ public class Driver {
 					System.out.printf("Max temperature found = %d\n", gMST.temperatureBFS(station));
 				}
 				// Extra prints
-			} else if (input == 0) {
-				System.out.println("g Print Hashtable");
-				g.printHashtable();
-				System.out.println("g Print Adjacency List");
-				g.printGraph();
-				System.out.println("mst Print Hashtable");
-				if (gMST != null) {
-					System.out.println("mst Print Hashtable");
-					gMST.printHashtable();
-					System.out.println("mst Print Adjacency List");
-					gMST.printGraph();
-				}
+			} else if (input == 6) {
+				g.displayNodes();
+				// if (gMST != null) {
+				// System.out.println("mst Print Hashtable");
+				// gMST.printHashtable();
+				// System.out.println("mst Print Adjacency List");
+				// gMST.printGraph();
+				// }
 			}
-			// Read next option
 			printMenu();
 			System.out.print("Enter option: ");
 			input = scan.nextInt();
+			if (input == 7) {
+				FileWriter myWriter = null;
+				try {
+					myWriter = new FileWriter("output.txt");
+					for (int i = 0; i < g.getHeight(); i++)
+						for (int j = 0; j < g.hashTable[i].size(); j++){
+							myWriter.write(g.hashTable[i].get(j) + " ");
+							myWriter.write(g.hashTable[i].get(j).getX() + " " );
+							myWriter.write(g.hashTable[i].get(j).getY() + " ");
+							myWriter.write(g.hashTable[i].get(j).getTemperature() + "\n");
+						}
+					myWriter.close();
+				} catch (IOException e) {
+					System.out.println("Cannot create file");
+					System.exit(0);
+				}
+			}
 		}
+		// Read next option
 
 	}
 
