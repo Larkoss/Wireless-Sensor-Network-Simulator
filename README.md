@@ -1,5 +1,4 @@
 # Wireless Sensor Network Simulator
-## Konstantinos Larkos & Zoe Passiadoou & George Aristodeimou
 
 ## Problem
 In this exercise you are invited to implement a Wireless Sensor Network Simulator program for the exchange and management of information within such a network. A Wireless Sensor Network (WSN) is a set of computing units with limited computing power and low memory. WSN can be placed in a forest, factories, etc. by dispersing the wireless sensors in such a way that they are repossessive to communicate with each other for data exchange. Wireless sensors have wireless tendons that allow communication between a sensor/node and nodes within its communication range. Also, each node has circuits that measure different environmental parameters such as temperature, humidity, etc.
@@ -20,3 +19,4 @@ Your program should take as an argument [in the command line), the value of d, a
 ## For further details
 Read Implementation.pdf
 ### Homework 3 EPL231 University of Cyprus Computer Science Department
+
